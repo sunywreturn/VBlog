@@ -43,12 +43,12 @@ public class LoginRegController {
     public RespBean reg(User user) {
         int result = userService.reg(user);
         if (result == 0) {
-            //成功
+            // 成功
             return new RespBean("success", "注册成功!");
         } else if (result == 1) {
             return new RespBean("error", "用户名重复，注册失败!");
         } else {
-            //失败
+            // 失败
             return new RespBean("error", "注册失败!");
         }
     }

@@ -108,7 +108,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-
     public String getPassword() {
         return password;
     }

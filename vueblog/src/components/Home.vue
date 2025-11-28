@@ -73,6 +73,15 @@
           }, function () {
             //取消
           })
+        } else if (command == 'MyHome') {
+          // 跳转到个人主页
+          this.$router.push('/profile');
+        } else if (command == 'MyArticle') {
+          // 跳转到文章列表
+          this.$router.push('/articleList');
+        } else if (command == 'sysMsg') {
+          // 系统消息功能
+          this.$message.info('系统消息功能待开发');
         }
       }
     },

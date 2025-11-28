@@ -256,17 +256,17 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('6', 'linghu', '令狐葱', '202cb962ac59075b964b07152d234b70', '1', 'linghu@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920326&di=44a6fa6b597d86f475c2b15fa93008dd&imgtype=0&src=http%3A%2F%2Fwww.qqzhi.com%2Fuploadpic%2F2015-01-12%2F023019564.jpg', '2017-12-08 09:30:22');
-INSERT INTO `user` VALUES ('7', 'sang', '江南一点雨', '202cb962ac59075b964b07152d234b70', '1', 'sang123@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-21 13:30:29');
-INSERT INTO `user` VALUES ('10', 'qiaofeng', '乔峰', '202cb962ac59075b964b07152d234b70', '1', 'qiaofeng@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('13', 'duanzhengchun', '段正淳', '202cb962ac59075b964b07152d234b70', '0', 'duanzhengchun@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('14', 'chenjialuo', '陈家洛', '202cb962ac59075b964b07152d234b70', '0', 'chenjialuo@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('15', 'yuanchengzhi', '袁承志', '202cb962ac59075b964b07152d234b70', '1', 'yuanchengzhi@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('16', 'chuliuxiang', '楚留香', '202cb962ac59075b964b07152d234b70', '1', 'chuliuxiang@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('17', 'baizhantang', '白展堂', '202cb962ac59075b964b07152d234b70', '0', 'baizhantang@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('18', 'renwoxing', '任我行', '202cb962ac59075b964b07152d234b70', '1', 'renwoxing@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('19', 'zuolengchan', '左冷禅', '202cb962ac59075b964b07152d234b70', '1', 'zuolengchan@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
-INSERT INTO `user` VALUES ('20', 'fengqingyang', '风清扬', '202cb962ac59075b964b07152d234b70', '1', 'fengqingyang@qq.com', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('6', 'linghu', '令狐葱', '202cb962ac59075b964b07152d234b70', '1', 'linghu@qq.com', '/images/avatars/default.png', '2017-12-08 09:30:22');
+INSERT INTO `user` VALUES ('7', 'sang', '江南一点雨', '202cb962ac59075b964b07152d234b70', '1', 'sang123@qq.com', '/images/avatars/default.png', '2017-12-21 13:30:29');
+INSERT INTO `user` VALUES ('10', 'qiaofeng', '乔峰', '202cb962ac59075b964b07152d234b70', '1', 'qiaofeng@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('13', 'duanzhengchun', '段正淳', '202cb962ac59075b964b07152d234b70', '0', 'duanzhengchun@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('14', 'chenjialuo', '陈家洛', '202cb962ac59075b964b07152d234b70', '0', 'chenjialuo@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('15', 'yuanchengzhi', '袁承志', '202cb962ac59075b964b07152d234b70', '1', 'yuanchengzhi@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('16', 'chuliuxiang', '楚留香', '202cb962ac59075b964b07152d234b70', '1', 'chuliuxiang@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('17', 'baizhantang', '白展堂', '202cb962ac59075b964b07152d234b70', '0', 'baizhantang@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('18', 'renwoxing', '任我行', '202cb962ac59075b964b07152d234b70', '1', 'renwoxing@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('19', 'zuolengchan', '左冷禅', '202cb962ac59075b964b07152d234b70', '1', 'zuolengchan@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
+INSERT INTO `user` VALUES ('20', 'fengqingyang', '风清扬', '202cb962ac59075b964b07152d234b70', '1', 'fengqingyang@qq.com', '/images/avatars/default.png', '2017-12-24 06:30:46');
 
 -- ----------------------------
 -- View structure for pvview

@@ -46,7 +46,7 @@ public class UserController {
         return false;
     }
 
-    @RequestMapping(value = "/updateUserEmail",method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateUserEmail", method = RequestMethod.PUT)
     public RespBean updateUserEmail(String email) {
         if (userService.updateUserEmail(email) == 1) {
             return new RespBean("success", "开启成功!");

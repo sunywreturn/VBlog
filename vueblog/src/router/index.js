@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
+import Register from '@/components/Register'
 import Home from '@/components/Home'
 import ArticleList from '@/components/ArticleList'
 import CateMana from '@/components/CateMana'
@@ -8,6 +9,7 @@ import DataCharts from '@/components/DataCharts'
 import PostArticle from '@/components/PostArticle'
 import UserMana from '@/components/UserMana'
 import BlogDetail from '@/components/BlogDetail'
+import Profile from '@/components/Profile'
 
 Vue.use(Router)
 
@@ -18,6 +20,16 @@ export default new Router({
       name: '登录',
       hidden: true,
       component: Login
+    }, {
+      path: '/login',
+      name: '登录',
+      hidden: true,
+      component: Login
+    }, {
+      path: '/register',
+      name: '注册',
+      hidden: true,
+      component: Register
     }, {
       path: '/home',
       name: '',
@@ -98,6 +110,11 @@ export default new Router({
           component: DataCharts
         }
       ]
+    }, {
+      path: '/profile',
+      name: '个人主页',
+      component: Profile,
+      hidden: true
     }
   ]
 })

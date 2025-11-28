@@ -14,7 +14,8 @@ import java.io.PrintWriter;
  */
 public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse resp, AccessDeniedException e) throws IOException, ServletException {
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse resp, AccessDeniedException e)
+            throws IOException, ServletException {
         resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
