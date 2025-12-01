@@ -75,6 +75,12 @@ public class UserService implements UserDetailsService {
 
     public List<User> getUserByNickname(String nickname) {
         List<User> list = userMapper.getUserByNickname(nickname);
+        // 为没有头像的用户设置默认头像
+        for (User user : list) {
+            if (user.getUserface() == null || user.getUserface().trim().isEmpty()) {
+                user.setUserface("/images/avatars/default.png");
+            }
+        }
         return list;
     }
 
@@ -96,6 +102,11 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserById(Long id) {
-        return userMapper.getUserById(id);
+        User user = userMapper.getUserById(id);
+        // 为没有头像的用户设置默认头像
+        if (user != null && (user.getUserface() == null || user.getUserface().trim().isEmpty())) {
+            user.setUserface("/images/avatars/default.png");
+        }
+        return user;
     }
 }

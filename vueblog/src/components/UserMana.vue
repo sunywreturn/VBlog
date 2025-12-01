@@ -19,7 +19,7 @@
           </el-button>
         </div>
         <div>
-          <div><img :src="user.userface" :alt="user.nickname" style="width: 70px;height: 70px"></div>
+          <div><img :src="getUserface(user)" :alt="user.nickname" style="width: 70px;height: 70px"></div>
           <div style="text-align: left;color:#20a0ff;font-size: 12px;margin-top: 13px">
             <span>用户名:</span><span>{{user.username}}</span>
           </div>
@@ -90,6 +90,13 @@
       });
     },
     methods: {
+      getUserface(user) {
+        // 如果用户没有头像，使用默认头像
+        if (!user.userface || user.userface.trim() === '') {
+          return '/api/images/avatars/default.png';
+        }
+        return user.userface;
+      },
       saveRoles(id, index){
         var selRoles = this.roles;
         if (this.cpRoles.length == selRoles.length) {
