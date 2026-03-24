@@ -1,0 +1,46 @@
+# TestBot 配置文件
+# 生成于 2026-03-23T03:14:56.230Z
+# 注意: 部分字段已根据项目自动分析填充
+
+# 项目基本信息
+project:
+  name: blogserver
+  language: Java # 主要编程语言，目前仅支持Java
+  description: # 项目简短描述
+  baseDir: c:\Users\Administrator\Desktop\aixcoder7.0\VBlog\blogserver
+
+# 测试用例生成配置
+testGeneration:
+  framework:
+    name: JUnit # 目前仅支持JUnit，请确保您的测试框架为JUnit
+    version: 5.5.2
+  maxIterations: 3 # 测试生成最大迭代次数，默认为3
+  outputDir: ./src/test/java # 测试生成输出目录，默认为./src/test/java
+
+# Mock生成配置
+mockGeneration:
+  framework:
+    name: Mockito # 目前仅支持Mockito，请确保您的Mock框架为Mockito
+    version: 3.1.0
+
+# 环境配置
+environment:
+  buildTools:
+    name: Maven # 目前仅支持Maven或Gradle
+    version: 3.9.0 # 构建工具版本，建议使用默认值，不同版本对测试运行影响很小
+
+  jdk: # jdk配置
+    version: 1.8 # jdk版本
+
+# 测试运行器配置
+runner:
+  mode: cloud # 可选：local，cloud （暂不支持local）
+  prefer: cloud-test-runner # 优先选择的运行器名称
+  available:
+    - name: cloud-test-runner # 运行器名称示例
+      type: cloud # local 或 cloud
+      description: # 运行器描述
+      maxParallel: 2 # 最大并行执行数，默认为2
+      endpoint: https://api.my-cloud-runner.com/v1/jobs # 云端运行器API端点
+      authToken: your-secure-auth-token-here # 云端运行器认证token
+

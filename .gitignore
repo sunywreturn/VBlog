@@ -7,3 +7,4 @@ yarn-error.log*
 target/
 !.mvn/wrapper/maven-wrapper.jar
 vueblog/package-lock.json
+.aider*
