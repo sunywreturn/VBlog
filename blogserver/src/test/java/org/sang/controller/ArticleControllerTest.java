@@ -17,7 +17,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -105,7 +105,7 @@ class ArticleControllerTest {
         when(request.getServerName()).thenReturn("localhost");
         when(request.getServerPort()).thenReturn(8080);
         when(request.getContextPath()).thenReturn("/blog");
-        when(request.getServletContext()).thenReturn(mock(javax.servlet.ServletContext.class));
+        when(request.getServletContext()).thenReturn(mock(jakarta.servlet.ServletContext.class));
         
         String expectedFilePath = "/blogimg/" + new SimpleDateFormat("yyyyMMdd").format(new Date());
         String mockRealPath = System.getProperty("java.io.tmpdir") + expectedFilePath;
@@ -133,7 +133,7 @@ class ArticleControllerTest {
         when(request.getServerName()).thenReturn("localhost");
         when(request.getServerPort()).thenReturn(8080);
         when(request.getContextPath()).thenReturn("/blog");
-        when(request.getServletContext()).thenReturn(mock(javax.servlet.ServletContext.class));
+        when(request.getServletContext()).thenReturn(mock(jakarta.servlet.ServletContext.class));
         
         String expectedFilePath = "/blogimg/" + new SimpleDateFormat("yyyyMMdd").format(new Date());
         String mockRealPath = System.getProperty("java.io.tmpdir") + expectedFilePath;
