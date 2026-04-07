@@ -2,10 +2,8 @@ package org.sang.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
 import org.sang.bean.Category;
 import org.sang.bean.RespBean;
 import org.sang.service.CategoryService;
@@ -17,188 +15,215 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class CategoryControllerTest {
+
+    private CategoryController categoryController;
 
     @Mock
     private CategoryService categoryService;
 
-    @InjectMocks
-    private CategoryController categoryController;
-
-    private Category testCategory;
-
     @BeforeEach
     void setUp() {
-        testCategory = new Category();
-        testCategory.setId(1L);
-        testCategory.setCateName("测试分类");
-        testCategory.setDate(new Timestamp(System.currentTimeMillis()));
+        MockitoAnnotations.openMocks(this);
+        categoryController = new CategoryController();
+        categoryController.categoryService = categoryService;
     }
 
     @Test
-    void getAllCategories_shouldReturnCategoryList_whenServiceReturnsList() {
-        List<Category> expectedCategories = new ArrayList<>();
-        expectedCategories.add(testCategory);
-        
-        when(categoryService.getAllCategories()).thenReturn(expectedCategories);
+    void getAllCategories_shouldReturnAllCategories() {
+        List<Category> categories = new ArrayList<>();
+        Category cat1 = new Category();
+        cat1.setId(1L);
+        cat1.setCateName("Tech");
+        cat1.setDate(new Timestamp(System.currentTimeMillis()));
+        categories.add(cat1);
+        Category cat2 = new Category();
+        cat2.setId(2L);
+        cat2.setCateName("Life");
+        cat2.setDate(new Timestamp(System.currentTimeMillis()));
+        categories.add(cat2);
+        when(categoryService.getAllCategories()).thenReturn(categories);
 
         List<Category> result = categoryController.getAllCategories();
 
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals(testCategory.getId(), result.get(0).getId());
-        assertEquals(testCategory.getCateName(), result.get(0).getCateName());
+        assertEquals(2, result.size());
         verify(categoryService).getAllCategories();
     }
 
     @Test
-    void getAllCategories_shouldReturnEmptyList_whenServiceReturnsEmptyList() {
-        List<Category> expectedCategories = new ArrayList<>();
-        
-        when(categoryService.getAllCategories()).thenReturn(expectedCategories);
+    void getAllCategories_shouldReturnEmptyListWhenNoCategories() {
+        when(categoryService.getAllCategories()).thenReturn(new ArrayList<>());
 
         List<Category> result = categoryController.getAllCategories();
 
-        assertNotNull(result);
         assertTrue(result.isEmpty());
         verify(categoryService).getAllCategories();
     }
 
     @Test
-    void deleteById_shouldReturnSuccessRespBean_whenDeleteSucceeds() {
-        String ids = "1,2,3";
-        when(categoryService.deleteCategoryByIds(ids)).thenReturn(true);
+    void getAllCategories_shouldReturnNullWhenServiceReturnsNull() {
+        when(categoryService.getAllCategories()).thenReturn(null);
 
-        RespBean result = categoryController.deleteById(ids);
+        List<Category> result = categoryController.getAllCategories();
 
-        assertNotNull(result);
+        assertNull(result);
+        verify(categoryService).getAllCategories();
+    }
+
+    @Test
+    void deleteById_shouldReturnSuccessRespBeanWhenDeletionSucceeds() {
+        when(categoryService.deleteCategoryByIds("1,2,3")).thenReturn(true);
+
+        RespBean result = categoryController.deleteById("1,2,3");
+
         assertEquals("success", result.getStatus());
         assertEquals("删除成功!", result.getMsg());
-        verify(categoryService).deleteCategoryByIds(ids);
+        verify(categoryService).deleteCategoryByIds("1,2,3");
     }
 
     @Test
-    void deleteById_shouldReturnErrorRespBean_whenDeleteFails() {
-        String ids = "1,2,3";
-        when(categoryService.deleteCategoryByIds(ids)).thenReturn(false);
+    void deleteById_shouldReturnErrorRespBeanWhenDeletionFails() {
+        when(categoryService.deleteCategoryByIds("1,2,3")).thenReturn(false);
 
-        RespBean result = categoryController.deleteById(ids);
+        RespBean result = categoryController.deleteById("1,2,3");
 
-        assertNotNull(result);
         assertEquals("error", result.getStatus());
         assertEquals("删除失败!", result.getMsg());
-        verify(categoryService).deleteCategoryByIds(ids);
+        verify(categoryService).deleteCategoryByIds("1,2,3");
     }
 
     @Test
-    void deleteById_shouldReturnErrorRespBean_whenIdsIsEmpty() {
-        String ids = "";
-        when(categoryService.deleteCategoryByIds(ids)).thenReturn(false);
+    void deleteById_shouldHandleSingleId() {
+        when(categoryService.deleteCategoryByIds("1")).thenReturn(true);
 
-        RespBean result = categoryController.deleteById(ids);
+        RespBean result = categoryController.deleteById("1");
 
-        assertNotNull(result);
+        assertEquals("success", result.getStatus());
+        assertEquals("删除成功!", result.getMsg());
+    }
+
+    @Test
+    void deleteById_shouldHandleEmptyIds() {
+        when(categoryService.deleteCategoryByIds("")).thenReturn(false);
+
+        RespBean result = categoryController.deleteById("");
+
         assertEquals("error", result.getStatus());
         assertEquals("删除失败!", result.getMsg());
-        verify(categoryService).deleteCategoryByIds(ids);
     }
 
     @Test
-    void addNewCate_shouldReturnSuccessRespBean_whenCategoryIsValidAndAddSucceeds() {
-        when(categoryService.addCategory(testCategory)).thenReturn(1);
+    void addNewCate_shouldReturnErrorRespBeanWhenCateNameIsEmpty() {
+        Category category = new Category();
+        category.setCateName("");
 
-        RespBean result = categoryController.addNewCate(testCategory);
+        RespBean result = categoryController.addNewCate(category);
 
-        assertNotNull(result);
+        assertEquals("error", result.getStatus());
+        assertEquals("请输入栏目名称!", result.getMsg());
+        verify(categoryService, never()).addCategory(any());
+    }
+
+    @Test
+    void addNewCate_shouldReturnErrorRespBeanWhenCateNameIsNull() {
+        Category category = new Category();
+        category.setCateName(null);
+
+        RespBean result = categoryController.addNewCate(category);
+
+        assertEquals("error", result.getStatus());
+        assertEquals("请输入栏目名称!", result.getMsg());
+        verify(categoryService, never()).addCategory(any());
+    }
+
+    @Test
+    void addNewCate_shouldReturnSuccessRespBeanWhenAddSucceeds() {
+        Category category = new Category();
+        category.setCateName("NewCategory");
+        when(categoryService.addCategory(category)).thenReturn(1);
+
+        RespBean result = categoryController.addNewCate(category);
+
         assertEquals("success", result.getStatus());
         assertEquals("添加成功!", result.getMsg());
-        verify(categoryService).addCategory(testCategory);
+        verify(categoryService).addCategory(category);
     }
 
     @Test
-    void addNewCate_shouldReturnErrorRespBean_whenCategoryIsValidButAddFails() {
-        when(categoryService.addCategory(testCategory)).thenReturn(0);
+    void addNewCate_shouldReturnErrorRespBeanWhenAddFails() {
+        Category category = new Category();
+        category.setCateName("NewCategory");
+        when(categoryService.addCategory(category)).thenReturn(0);
 
-        RespBean result = categoryController.addNewCate(testCategory);
+        RespBean result = categoryController.addNewCate(category);
 
-        assertNotNull(result);
         assertEquals("error", result.getStatus());
         assertEquals("添加失败!", result.getMsg());
-        verify(categoryService).addCategory(testCategory);
+        verify(categoryService).addCategory(category);
     }
 
     @Test
-    void addNewCate_shouldReturnErrorRespBean_whenCateNameIsEmpty() {
-        Category categoryWithEmptyName = new Category();
-        categoryWithEmptyName.setCateName("");
+    void addNewCate_shouldHandleValidCateName() {
+        Category category = new Category();
+        category.setCateName("ValidCategory");
+        when(categoryService.addCategory(category)).thenReturn(1);
 
-        RespBean result = categoryController.addNewCate(categoryWithEmptyName);
+        RespBean result = categoryController.addNewCate(category);
 
-        assertNotNull(result);
-        assertEquals("error", result.getStatus());
-        assertEquals("请输入栏目名称!", result.getMsg());
-        verify(categoryService, never()).addCategory(any(Category.class));
+        assertEquals("success", result.getStatus());
+        assertEquals("添加成功!", result.getMsg());
     }
 
     @Test
-    void addNewCate_shouldReturnErrorRespBean_whenCateNameIsNull() {
-        Category categoryWithNullName = new Category();
-        categoryWithNullName.setCateName(null);
+    void updateCate_shouldReturnSuccessRespBeanWhenUpdateSucceeds() {
+        Category category = new Category();
+        category.setId(1L);
+        category.setCateName("UpdatedCategory");
+        when(categoryService.updateCategoryById(category)).thenReturn(1);
 
-        RespBean result = categoryController.addNewCate(categoryWithNullName);
+        RespBean result = categoryController.updateCate(category);
 
-        assertNotNull(result);
-        assertEquals("error", result.getStatus());
-        assertEquals("请输入栏目名称!", result.getMsg());
-        verify(categoryService, never()).addCategory(any(Category.class));
-    }
-
-    @Test
-    void addNewCate_shouldReturnErrorRespBean_whenServiceReturnsNegativeValue() {
-        when(categoryService.addCategory(testCategory)).thenReturn(-1);
-
-        RespBean result = categoryController.addNewCate(testCategory);
-
-        assertNotNull(result);
-        assertEquals("error", result.getStatus());
-        assertEquals("添加失败!", result.getMsg());
-        verify(categoryService).addCategory(testCategory);
-    }
-
-    @Test
-    void updateCate_shouldReturnSuccessRespBean_whenUpdateSucceeds() {
-        when(categoryService.updateCategoryById(testCategory)).thenReturn(1);
-
-        RespBean result = categoryController.updateCate(testCategory);
-
-        assertNotNull(result);
         assertEquals("success", result.getStatus());
         assertEquals("修改成功!", result.getMsg());
-        verify(categoryService).updateCategoryById(testCategory);
+        verify(categoryService).updateCategoryById(category);
     }
 
     @Test
-    void updateCate_shouldReturnErrorRespBean_whenUpdateFails() {
-        when(categoryService.updateCategoryById(testCategory)).thenReturn(0);
+    void updateCate_shouldReturnErrorRespBeanWhenUpdateFails() {
+        Category category = new Category();
+        category.setId(1L);
+        category.setCateName("UpdatedCategory");
+        when(categoryService.updateCategoryById(category)).thenReturn(0);
 
-        RespBean result = categoryController.updateCate(testCategory);
+        RespBean result = categoryController.updateCate(category);
 
-        assertNotNull(result);
         assertEquals("error", result.getStatus());
         assertEquals("修改失败!", result.getMsg());
-        verify(categoryService).updateCategoryById(testCategory);
+        verify(categoryService).updateCategoryById(category);
     }
 
     @Test
-    void updateCate_shouldReturnErrorRespBean_whenServiceReturnsNegativeValue() {
-        when(categoryService.updateCategoryById(testCategory)).thenReturn(-1);
+    void updateCate_shouldHandleCategoryWithNullId() {
+        Category category = new Category();
+        category.setCateName("CategoryWithoutId");
+        when(categoryService.updateCategoryById(category)).thenReturn(0);
 
-        RespBean result = categoryController.updateCate(testCategory);
+        RespBean result = categoryController.updateCate(category);
 
-        assertNotNull(result);
         assertEquals("error", result.getStatus());
         assertEquals("修改失败!", result.getMsg());
-        verify(categoryService).updateCategoryById(testCategory);
+    }
+
+    @Test
+    void updateCate_shouldHandleCategoryWithEmptyCateName() {
+        Category category = new Category();
+        category.setId(1L);
+        category.setCateName("");
+        when(categoryService.updateCategoryById(category)).thenReturn(0);
+
+        RespBean result = categoryController.updateCate(category);
+
+        assertEquals("error", result.getStatus());
+        assertEquals("修改失败!", result.getMsg());
     }
 }

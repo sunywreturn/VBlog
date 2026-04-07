@@ -13,7 +13,7 @@ project:
 testGeneration:
   framework:
     name: JUnit # 目前仅支持JUnit，请确保您的测试框架为JUnit
-    version: 5.5.2
+    version: 5.12.2
   maxIterations: 3 # 测试生成最大迭代次数，默认为3
   outputDir: ./src/test/java # 测试生成输出目录，默认为./src/test/java
 
@@ -21,7 +21,7 @@ testGeneration:
 mockGeneration:
   framework:
     name: Mockito # 目前仅支持Mockito，请确保您的Mock框架为Mockito
-    version: 3.1.0
+    version: 5.17.0
 
 # 环境配置
 environment:
@@ -30,7 +30,7 @@ environment:
     version: 3.9.0 # 构建工具版本，建议使用默认值，不同版本对测试运行影响很小
 
   jdk: # jdk配置
-    version: 1.8 # jdk版本
+    version: 17 # jdk版本
 
 # 测试运行器配置
 runner:
